@@ -92,15 +92,15 @@
   }
 
   .h1-bold {
-    @apply text-[30px] font-bold leading-[42px] tracking-tighter;
+    @apply text-[64px] font-bold leading-[64px] tracking-tight;
   }
 
   .h2-bold {
-    @apply text-[24px] font-bold leading-[31.2px];
+    @apply text-[48px] font-bold leading-[31.2px];
   }
 
   .h2-semibold {
-    @apply text-[24px] font-semibold leading-[31.2px];
+    @apply text-[48px] font-semibold leading-[31.2px];
   }
 
   .h3-bold {

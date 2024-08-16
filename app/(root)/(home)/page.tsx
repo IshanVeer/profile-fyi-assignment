@@ -1,56 +1,126 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
-const page = () => {
+async function getItems() {
+  const res = await fetch('https://fakestoreapi.com/products');
+  const items = await res.json();
+
+  return items;
+}
+
+const page = async () => {
+  const items = await getItems();
+  console.log(items, 'items');
   return (
-    <div className='m-auto flex  justify-between bg-primary-500  '>
+    <div>
       {/* header content */}
-      <div className='max-w-[50%] px-16 py-20'>
-        <h1 className='font-poppins text-[64px] font-bold leading-[64px] tracking-tight'>
-          FIND CLOTHES THAT MATCHES YOUR STYLE
-        </h1>
-        <p className='paragraph-regular mt-6 text-neutral-500'>
-          Browse through our diverse range of meticulously crafted garments,
-          designed to bring out your individuality and cater to your sense of
-          style.
-        </p>
-        <Link
-          href='/products'
-          className='paragraph-regular  mt-6 inline-block rounded-full bg-black px-16 py-3 text-neutral-200 transition duration-150 hover:bg-slate-500'
-        >
-          Shop Now
-        </Link>
-        {/* brand info */}
-        <div className='mt-10 flex justify-between'>
-          <div className='border-r-2 pr-8'>
-            <h3 className='text-[40px] leading-[54px]'>200+</h3>
-            <p className='body-regular text-neutral-500 '>
-              International Brands
-            </p>
-          </div>
-          <div className='border-r-2 px-8'>
-            <h3 className='text-[40px] leading-[54px]'>2,000+</h3>
-            <p className='body-regular text-neutral-500 '>
-              High-Quality Products
-            </p>
-          </div>
-          <div className='px-8'>
-            <h3 className='text-[40px] leading-[54px]'>30,000+</h3>
-            <p className='body-regular text-neutral-500 '>Happy Customers </p>
+      <header className='m-auto flex  justify-between bg-primary-500  '>
+        <div className='max-w-[50%] px-16 py-20'>
+          <h1 className='h1-bold font-poppins'>
+            FIND PRODUCTS THAT MATCHES YOUR STYLE
+          </h1>
+          <p className='paragraph-regular mt-6 text-neutral-500'>
+            Browse through our diverse range of meticulous products, designed to
+            bring out your individuality and cater to your sense of style.
+          </p>
+          <Link
+            href='/products'
+            className='paragraph-regular  mt-6 inline-block rounded-full bg-black px-16 py-3 text-neutral-200 transition duration-150 hover:bg-slate-500'
+          >
+            Shop Now
+          </Link>
+          {/* brand info */}
+          <div className='mt-10 flex justify-between'>
+            <div className='border-r-2 pr-8'>
+              <h3 className='text-[40px] leading-[54px]'>200+</h3>
+              <p className='body-regular text-neutral-500 '>
+                International Brands
+              </p>
+            </div>
+            <div className='border-r-2 px-8'>
+              <h3 className='text-[40px] leading-[54px]'>2,000+</h3>
+              <p className='body-regular text-neutral-500 '>
+                High-Quality Products
+              </p>
+            </div>
+            <div className='px-8'>
+              <h3 className='text-[40px] leading-[54px]'>30,000+</h3>
+              <p className='body-regular text-neutral-500 '>Happy Customers </p>
+            </div>
           </div>
         </div>
-      </div>
-      {/* header image */}
-      <div className='w-full pr-8'>
-        <Image
-          src='/assets/images/Rectangle 2.png'
-          alt='header image'
-          width={450}
-          height={450}
-          className='w-full'
-        />
-      </div>
+        {/* header image */}
+        <div className='w-full pr-8'>
+          <Image
+            src='/assets/images/Rectangle 2.png'
+            alt='header image'
+            width={450}
+            height={450}
+            className='w-full'
+          />
+        </div>
+      </header>
+      {/* section 1 */}
+      <section className='m-auto mt-12 px-16 pt-20 text-center'>
+        <h2 className='h2-bold my-12'>NEW ARRIVALS</h2>
+        <ul className='flex items-center justify-between gap-4'>
+          {items.slice(0, 4).map((item: any) => (
+            <li
+              key={item.id}
+              className=' w-full flex flex-col items-center px-4 py-6 shadow-sm bg-neutral-50 rounded-lg flex-grow'
+            >
+              <Link href={`/products/${item.id}`}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={50}
+                  height={50}
+                  className='w-full object-contain h-[250px]'
+                />{' '}
+                <p className='base-semibold  p-2 m-2'>
+                  {item.title.slice(0, 12)}
+                </p>{' '}
+                <p className='h3-bold'>{`$${item.price}`}</p>
+              </Link>
+              <Button className='my-4 bg-black text-neutral-100 w-full hover:bg-neutral-800'>
+                Add To Cart
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </section>
+      {/* section 2 */}
+      <section className='m-auto mt-12 px-16 py-20 text-center'>
+        <h2 className='h2-bold my-12'>TOP SELLING</h2>
+        <ul className='flex items-center justify-between gap-4'>
+          {items.slice(4, 8).map((item: any) => (
+            <li
+              key={item.id}
+              className=' w-full flex flex-col items-center px-4 py-6 shadow-sm bg-neutral-50 rounded-lg flex-grow'
+            >
+              <Link href={`/products/${item.id}`}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={50}
+                  height={50}
+                  className='w-full object-contain h-[250px]'
+                />{' '}
+                <p className='base-semibold  p-2 m-2'>
+                  {item.title.slice(0, 12)}
+                </p>{' '}
+                <p className='h3-bold'>{`$${item.price}`}</p>
+              </Link>
+              <Button className='my-4 bg-black text-neutral-100 w-full hover:bg-neutral-800'>
+                Add To Cart
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <footer className='h-[320px] bg-primary-500'></footer>
     </div>
   );
 };
