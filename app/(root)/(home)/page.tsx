@@ -120,7 +120,7 @@ const page = async () => {
           ))}
         </ul>
       </section>
-      <footer className='h-[320px] bg-primary-500'></footer>
+      <footer className='h-[200px] bg-primary-500'></footer>
     </div>
   );
 };
