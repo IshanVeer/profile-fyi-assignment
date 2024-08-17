@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Button } from '@/components/ui/button';
 import { getItems } from '@/lib/getItems';
+import Items from '@/components/items/Items';
 
 const page = async () => {
   const items = await getItems();
-  console.log(items, 'items');
+
   return (
     <div>
       {/* header content */}
@@ -63,65 +63,21 @@ const page = async () => {
         </div>
       </header>
       {/* section 1 */}
-      <section className='m-auto mt-12 px-16 pt-20 text-center'>
+      <section className='m-auto mt-12 px-16 py-20 text-center max-sm:px-8 max-sm:py-10'>
         <h2 className='h2-bold my-12 max-sm:leading-tight'>NEW ARRIVALS</h2>
-        <div className='overflow-x-auto'>
-          <ul className='flex items-center justify-between gap-4'>
-            {items.slice(0, 4).map((item: any) => (
-              <li
-                key={item.id}
-                className=' flex w-full grow flex-col items-center rounded-lg bg-neutral-50 px-4 py-6 shadow-sm'
-              >
-                <Link href={`/products/${item.id}`}>
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={50}
-                    height={50}
-                    className='h-[250px] w-full object-contain'
-                  />{' '}
-                  <p className='base-semibold  m-2 p-2'>
-                    {item.title.slice(0, 12)}
-                  </p>{' '}
-                  <p className='h3-bold'>{`$${item.price}`}</p>
-                </Link>
-                <Button className='my-4 w-full bg-black text-neutral-100 hover:bg-neutral-800'>
-                  Add To Cart
-                </Button>
-              </li>
-            ))}
-          </ul>
+        <div className='flex items-center gap-4 overflow-x-auto'>
+          {items.slice(0, 4).map((item: any) => (
+            <Items key={item.id} item={item} />
+          ))}
         </div>
       </section>
       {/* section 2 */}
-      <section className='m-auto mt-12 px-16 py-20 text-center'>
+      <section className='m-auto mt-12 px-16 py-20 text-center max-sm:px-8 max-sm:py-10'>
         <h2 className='h2-bold my-12 max-sm:leading-8'>TOP SELLING</h2>
-        <div className='overflow-x-auto'>
-          <ul className='flex items-center justify-between gap-4'>
-            {items.slice(4, 8).map((item: any) => (
-              <li
-                key={item.id}
-                className=' flex w-full grow flex-col items-center rounded-lg bg-neutral-50 px-4 py-6 shadow-sm max-sm:p-6'
-              >
-                <Link href={`/products/${item.id}`}>
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={50}
-                    height={50}
-                    className='h-[250px] w-full object-contain max-sm:h-[150px]'
-                  />{' '}
-                  <p className='base-semibold  m-2 p-2'>
-                    {item.title.slice(0, 12)}
-                  </p>{' '}
-                  <p className='h3-bold'>{`$${item.price}`}</p>
-                </Link>
-                <Button className='my-4 w-full bg-black text-neutral-100 hover:bg-neutral-800'>
-                  Add To Cart
-                </Button>
-              </li>
-            ))}
-          </ul>
+        <div className='flex items-center gap-4 overflow-x-auto'>
+          {items.slice(4, 8).map((item: any) => (
+            <Items key={item.id} item={item} />
+          ))}
         </div>
       </section>
       <footer className='h-[200px] bg-primary-500'></footer>

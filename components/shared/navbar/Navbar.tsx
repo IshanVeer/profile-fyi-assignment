@@ -1,12 +1,19 @@
-import React from 'react';
+'use client';
+import React, { useContext } from 'react';
 import { NavbarLinks } from '@/constants';
 import Link from 'next/link';
 import Image from 'next/image';
 import GlobalSearch from '../search/GlobalSearch';
 import MobileNav from './MobileNav';
 import { Button } from '@/components/ui/button';
+import CartContext from '@/context/CartContext';
 
 const Navbar = () => {
+  const cartCtx = useContext(CartContext);
+
+  const totalCartItems = cartCtx.items.reduce((totalNumberOfItems, item) => {
+    return totalNumberOfItems + item.quantity;
+  }, 0);
   return (
     <nav className='m-auto flex items-center justify-between px-8 py-4'>
       <div className='flex items-center gap-3'>
@@ -53,8 +60,8 @@ const Navbar = () => {
             className='hover:stroke-neutral-300'
           />
         </Link>
-        <span className='subtle-regular relative bottom-3 right-3 rounded-[100%] bg-primary-500 px-2 py-1 font-bold'>
-          0
+        <span className='subtle-regular relative bottom-3 right-3 rounded-[100%] bg-orange-300 px-2 py-1 font-bold'>
+          {totalCartItems}
         </span>
       </div>
     </nav>

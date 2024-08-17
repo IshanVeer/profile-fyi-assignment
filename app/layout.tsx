@@ -3,6 +3,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, Poppins } from 'next/font/google';
 import './globals.css';
+import { CartContextProvider } from '@/context/CartContext';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${poppins.variable}`}
       >
-        {children}
+        <CartContextProvider>{children}</CartContextProvider>
       </body>
     </html>
   );
