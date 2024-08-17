@@ -40,6 +40,7 @@ const Navbar = () => {
             height={24}
           />
         </Button>
+
         <Link
           href='/cart'
           className='transition duration-150 hover:stroke-neutral-300'
@@ -52,6 +53,9 @@ const Navbar = () => {
             className='hover:stroke-neutral-300'
           />
         </Link>
+        <span className='subtle-regular relative bottom-3 right-3 rounded-[100%] bg-primary-500 px-2 py-1 font-bold'>
+          0
+        </span>
       </div>
     </nav>
   );
