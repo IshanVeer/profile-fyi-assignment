@@ -4,6 +4,9 @@ import React, { createContext, useReducer } from 'react';
 interface CartItem {
   id: number | string;
   quantity: number;
+  title: string;
+  image: string;
+  price: number;
 }
 interface CartState {
   items: CartItem[];
