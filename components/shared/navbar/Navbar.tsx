@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className='flex items-center gap-3'>
         <MobileNav />
         <Link href='/'>
-          <h1 className='h1-bold max-sm:text-[25px] font-poppins uppercase '>
+          <h1 className='h1-bold font-poppins uppercase max-sm:text-[25px] '>
             shop.co
           </h1>
         </Link>

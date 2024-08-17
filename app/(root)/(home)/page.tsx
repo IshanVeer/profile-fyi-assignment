@@ -2,13 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Button } from '@/components/ui/button';
-
-async function getItems() {
-  const res = await fetch('https://fakestoreapi.com/products');
-  const items = await res.json();
-
-  return items;
-}
+import { getItems } from '@/lib/getItems';
 
 const page = async () => {
   const items = await getItems();
@@ -16,8 +10,8 @@ const page = async () => {
   return (
     <div>
       {/* header content */}
-      <header className='m-auto flex max-sm:flex-col  justify-between bg-primary-500  '>
-        <div className='max-w-[50%] max-sm:max-w-none max-sm:text-center px-16 py-20'>
+      <header className='m-auto flex justify-between  bg-primary-500 max-sm:flex-col  '>
+        <div className='max-w-[50%] px-16 py-20 max-sm:max-w-none max-sm:text-center'>
           <h1 className='h1-bold font-poppins max-sm:text-[36px] max-sm:leading-10'>
             FIND PRODUCTS THAT MATCHES YOUR STYLE
           </h1>
@@ -34,7 +28,7 @@ const page = async () => {
           {/* brand info */}
           <div className='mt-10 flex justify-between'>
             <div className='border-r-2 pr-8'>
-              <h3 className='text-[40px] max-sm:text-[24px] leading-[54px]'>
+              <h3 className='text-[40px] leading-[54px] max-sm:text-[24px]'>
                 200+
               </h3>
               <p className='body-regular text-neutral-500 '>
@@ -42,7 +36,7 @@ const page = async () => {
               </p>
             </div>
             <div className='border-r-2 px-8'>
-              <h3 className='text-[40px] max-sm:text-[24px] leading-[54px]'>
+              <h3 className='text-[40px] leading-[54px] max-sm:text-[24px]'>
                 2,000+
               </h3>
               <p className='body-regular text-neutral-500 '>
@@ -50,7 +44,7 @@ const page = async () => {
               </p>
             </div>
             <div className='px-8'>
-              <h3 className='text-[40px] max-sm:text-[24px] leading-[54px]'>
+              <h3 className='text-[40px] leading-[54px] max-sm:text-[24px]'>
                 30,000+
               </h3>
               <p className='body-regular text-neutral-500 '>Happy Customers </p>
@@ -76,7 +70,7 @@ const page = async () => {
             {items.slice(0, 4).map((item: any) => (
               <li
                 key={item.id}
-                className=' w-full flex flex-col items-center px-4 py-6 shadow-sm bg-neutral-50 rounded-lg flex-grow'
+                className=' flex w-full grow flex-col items-center rounded-lg bg-neutral-50 px-4 py-6 shadow-sm'
               >
                 <Link href={`/products/${item.id}`}>
                   <Image
@@ -84,14 +78,14 @@ const page = async () => {
                     alt={item.title}
                     width={50}
                     height={50}
-                    className='w-full object-contain h-[250px]'
+                    className='h-[250px] w-full object-contain'
                   />{' '}
-                  <p className='base-semibold  p-2 m-2'>
+                  <p className='base-semibold  m-2 p-2'>
                     {item.title.slice(0, 12)}
                   </p>{' '}
                   <p className='h3-bold'>{`$${item.price}`}</p>
                 </Link>
-                <Button className='my-4 bg-black text-neutral-100 w-full hover:bg-neutral-800'>
+                <Button className='my-4 w-full bg-black text-neutral-100 hover:bg-neutral-800'>
                   Add To Cart
                 </Button>
               </li>
@@ -107,7 +101,7 @@ const page = async () => {
             {items.slice(4, 8).map((item: any) => (
               <li
                 key={item.id}
-                className=' w-full flex flex-col items-center px-4 py-6 max-sm:p-6 shadow-sm bg-neutral-50 rounded-lg flex-grow'
+                className=' flex w-full grow flex-col items-center rounded-lg bg-neutral-50 px-4 py-6 shadow-sm max-sm:p-6'
               >
                 <Link href={`/products/${item.id}`}>
                   <Image
@@ -115,14 +109,14 @@ const page = async () => {
                     alt={item.title}
                     width={50}
                     height={50}
-                    className='w-full object-contain h-[250px] max-sm:h-[150px]'
+                    className='h-[250px] w-full object-contain max-sm:h-[150px]'
                   />{' '}
-                  <p className='base-semibold  p-2 m-2'>
+                  <p className='base-semibold  m-2 p-2'>
                     {item.title.slice(0, 12)}
                   </p>{' '}
                   <p className='h3-bold'>{`$${item.price}`}</p>
                 </Link>
-                <Button className='my-4 bg-black text-neutral-100 w-full hover:bg-neutral-800'>
+                <Button className='my-4 w-full bg-black text-neutral-100 hover:bg-neutral-800'>
                   Add To Cart
                 </Button>
               </li>
