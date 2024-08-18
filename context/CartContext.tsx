@@ -15,15 +15,18 @@ interface CartState {
 interface CartContextType extends CartState {
   addItem: (item: Omit<CartItem, 'quantity'>) => void;
   removeItem: (id: CartItem['id']) => void;
+  clearCart: () => void;
 }
 type CartAction =
   | { type: 'ADD_ITEM'; item: Omit<CartItem, 'quantity'> }
-  | { type: 'REMOVE_ITEM'; id: CartItem['id'] };
+  | { type: 'REMOVE_ITEM'; id: CartItem['id'] }
+  | { type: 'CLEAR_CART' };
 
 const CartContext = createContext<CartContextType>({
   items: [],
   addItem: (item) => {},
   removeItem: (id) => {},
+  clearCart: () => {},
 });
 
 const cartReducer = (state: CartState, action: CartAction) => {
@@ -65,6 +68,9 @@ const cartReducer = (state: CartState, action: CartAction) => {
     }
     return { ...state, items: updatedItems };
   }
+  if (action.type === 'CLEAR_CART') {
+    return { items: [] };
+  }
 
   return state;
 };
@@ -82,10 +88,14 @@ export const CartContextProvider = ({
   const removeItem = (id: CartItem['id']) => {
     dispatchCartAction({ type: 'REMOVE_ITEM', id });
   };
+  const clearCart = () => {
+    dispatchCartAction({ type: 'CLEAR_CART' });
+  };
   const cartContext = {
     items: cart.items,
     addItem,
     removeItem,
+    clearCart,
   };
   console.log(cartContext, 'cartContext');
 

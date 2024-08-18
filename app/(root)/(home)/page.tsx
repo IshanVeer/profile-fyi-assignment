@@ -70,15 +70,27 @@ const page = async () => {
             <Items key={item.id} item={item} />
           ))}
         </div>
+        <Link
+          href='/products'
+          className='mt-12 inline-block rounded-full border px-6 py-2 shadow-sm '
+        >
+          View All
+        </Link>
       </section>
       {/* section 2 */}
-      <section className='m-auto mt-12 px-16 py-20 text-center max-sm:px-8 max-sm:py-10'>
+      <section className='m-auto mb-16 mt-8 px-16 text-center max-sm:px-8 max-sm:py-10'>
         <h2 className='h2-bold my-12 max-sm:leading-8'>TOP SELLING</h2>
         <div className='flex items-center gap-4 overflow-x-auto'>
           {items.slice(4, 8).map((item: any) => (
             <Items key={item.id} item={item} />
           ))}
         </div>
+        <Link
+          href='/products'
+          className='mt-12 inline-block rounded-full border px-6 py-2 shadow-sm '
+        >
+          View All
+        </Link>
       </section>
       <footer className='h-[200px] bg-primary-500'></footer>
     </div>
