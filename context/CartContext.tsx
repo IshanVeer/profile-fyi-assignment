@@ -14,19 +14,22 @@ interface CartState {
 
 interface CartContextType extends CartState {
   addItem: (item: Omit<CartItem, 'quantity'>) => void;
-  removeItem: (id: CartItem['id']) => void;
+  decreaseItem: (id: CartItem['id']) => void;
   clearCart: () => void;
+  removeItem: (id: CartItem['id']) => void;
 }
 type CartAction =
   | { type: 'ADD_ITEM'; item: Omit<CartItem, 'quantity'> }
-  | { type: 'REMOVE_ITEM'; id: CartItem['id'] }
-  | { type: 'CLEAR_CART' };
+  | { type: 'DECREASE_ITEM'; id: CartItem['id'] }
+  | { type: 'CLEAR_CART' }
+  | { type: 'REMOVE_ITEM'; id: CartItem['id'] };
 
 const CartContext = createContext<CartContextType>({
   items: [],
   addItem: (item) => {},
-  removeItem: (id) => {},
+  decreaseItem: (id) => {},
   clearCart: () => {},
+  removeItem: (id) => {},
 });
 
 const cartReducer = (state: CartState, action: CartAction) => {
@@ -49,7 +52,7 @@ const cartReducer = (state: CartState, action: CartAction) => {
     }
     return { ...state, items: updatedItems };
   }
-  if (action.type === 'REMOVE_ITEM') {
+  if (action.type === 'DECREASE_ITEM') {
     const existingCartItemIndex = state.items.findIndex(
       (item: any) => item.id === action.id
     );
@@ -71,6 +74,14 @@ const cartReducer = (state: CartState, action: CartAction) => {
   if (action.type === 'CLEAR_CART') {
     return { items: [] };
   }
+  if (action.type === 'REMOVE_ITEM') {
+    const existingCartItemIndex = state.items.findIndex(
+      (item: any) => item.id === action.id
+    );
+    const updatedItems = [...state.items];
+    updatedItems.splice(existingCartItemIndex, 1);
+    return { ...state, items: updatedItems };
+  }
 
   return state;
 };
@@ -85,17 +96,21 @@ export const CartContextProvider = ({
   const addItem = (item: Omit<CartItem, 'quantity'>) => {
     dispatchCartAction({ type: 'ADD_ITEM', item });
   };
-  const removeItem = (id: CartItem['id']) => {
-    dispatchCartAction({ type: 'REMOVE_ITEM', id });
+  const decreaseItem = (id: CartItem['id']) => {
+    dispatchCartAction({ type: 'DECREASE_ITEM', id });
   };
   const clearCart = () => {
     dispatchCartAction({ type: 'CLEAR_CART' });
   };
+  const removeItem = (id: CartItem['id']) => {
+    dispatchCartAction({ type: 'REMOVE_ITEM', id });
+  };
   const cartContext = {
     items: cart.items,
     addItem,
-    removeItem,
+    decreaseItem,
     clearCart,
+    removeItem,
   };
   console.log(cartContext, 'cartContext');
 

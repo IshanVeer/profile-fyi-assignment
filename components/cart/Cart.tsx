@@ -46,22 +46,32 @@ const Cart = () => {
                     <p className='text-[24px] max-sm:text-[16px]'>{`$${item.price}`}</p>
                   </div>
                 </div>
-                <div className='rounded-md border bg-white shadow-sm'>
-                  <Button
-                    className=' text-[24px] max-sm:text-[14px]'
-                    onClick={() => cartCtx.removeItem(item.id)}
-                  >
-                    -
-                  </Button>{' '}
-                  <span className='  text-[24px]  max-sm:text-[14px]'>
-                    {item.quantity}
-                  </span>{' '}
-                  <Button
-                    className=' text-[24px]  max-sm:text-[14px]'
-                    onClick={() => cartCtx.addItem(item)}
-                  >
-                    +
+                <div className='flex flex-col items-end justify-between gap-4 max-sm:flex-row max-sm:gap-2'>
+                  <Button onClick={() => cartCtx.removeItem(item.id)}>
+                    <Image
+                      src='/assets/icons/trashcan-svgrepo-com.svg'
+                      alt='remove'
+                      width={25}
+                      height={25}
+                    />
                   </Button>
+                  <div className='rounded-md border bg-white shadow-sm'>
+                    <Button
+                      className=' text-[24px] max-sm:text-[14px]'
+                      onClick={() => cartCtx.decreaseItem(item.id)}
+                    >
+                      -
+                    </Button>{' '}
+                    <span className='  text-[24px]  max-sm:text-[14px]'>
+                      {item.quantity}
+                    </span>{' '}
+                    <Button
+                      className=' text-[24px]  max-sm:text-[14px]'
+                      onClick={() => cartCtx.addItem(item)}
+                    >
+                      +
+                    </Button>
+                  </div>
                 </div>
               </li>
             ))}
