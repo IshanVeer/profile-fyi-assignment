@@ -23,15 +23,15 @@ const Cart = () => {
   return (
     <div>
       {isSuccessModalOpen && <CartSuccessModal />}
-      <div className='flex'>
-        <div className='m-10 w-[70%] rounded-lg bg-neutral-100'>
+      <div className='flex max-sm:mx-4 max-sm:flex-col'>
+        <div className='m-10 w-[70%] rounded-lg bg-neutral-100 max-sm:m-0 max-sm:w-full'>
           <ul>
             {cartCtx.items.map((item) => (
               <li
                 key={item.id}
-                className=' flex items-center justify-between border-b-2 px-4 py-8'
+                className=' flex items-center justify-between border-b-2 px-4 py-8 max-sm:flex-col max-sm:items-end'
               >
-                <div className='flex items-center gap-12'>
+                <div className='flex items-center gap-12 max-sm:items-start max-sm:gap-4'>
                   <Image
                     src={item.image}
                     className='w-20'
@@ -40,20 +40,24 @@ const Cart = () => {
                     height={50}
                   />
                   <div className='flex flex-col justify-between gap-6'>
-                    <p className='h3-semibold'>{item.title}</p>
-                    <p className='text-[24px]'>{`$${item.price}`}</p>
+                    <p className='h3-semibold max-sm:text-[18px]'>
+                      {item.title}
+                    </p>
+                    <p className='text-[24px] max-sm:text-[16px]'>{`$${item.price}`}</p>
                   </div>
                 </div>
                 <div className='rounded-md border bg-white shadow-sm'>
                   <Button
-                    className='text-[24px]'
+                    className=' text-[24px] max-sm:text-[14px]'
                     onClick={() => cartCtx.removeItem(item.id)}
                   >
                     -
                   </Button>{' '}
-                  <span className='text-[24px]'>{item.quantity}</span>{' '}
+                  <span className='  text-[24px]  max-sm:text-[14px]'>
+                    {item.quantity}
+                  </span>{' '}
                   <Button
-                    className='text-[24px]'
+                    className=' text-[24px]  max-sm:text-[14px]'
                     onClick={() => cartCtx.addItem(item)}
                   >
                     +
@@ -63,7 +67,7 @@ const Cart = () => {
             ))}
           </ul>
         </div>
-        <div className='m-10 h-full w-[30%] rounded-lg bg-neutral-100 px-8'>
+        <div className='m-10 h-full w-[30%] rounded-lg bg-neutral-100 px-8 max-sm:m-0 max-sm:mt-6 max-sm:w-full'>
           <h2 className='h3-semibold mt-6'>Order Summary</h2>
           <div className='my-10 flex flex-col gap-4'>
             {/* subtotal */}

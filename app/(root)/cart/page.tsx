@@ -4,7 +4,7 @@ import React from 'react';
 const page = () => {
   return (
     <div>
-      <h2 className='h2-bold mt-4 p-8'>Cart</h2>
+      <h2 className='h2-bold mt-4 p-8'>Your Cart</h2>
       <Cart />
     </div>
   );
