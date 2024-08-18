@@ -1,4 +1,3 @@
-import { useParams } from 'next/navigation';
 import React from 'react';
 import { getItems } from '@/lib/getItems';
 import ItemDetail from '@/components/items/ItemDetail';
