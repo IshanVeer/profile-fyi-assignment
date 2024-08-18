@@ -41,7 +41,7 @@ const ItemDetail = ({ items }: ItemProps) => {
 
   return (
     <div>
-      <div className='flex gap-20 px-8 py-12 '>
+      <div className='flex gap-20 px-8 py-12 max-sm:flex-col '>
         <Image
           src={individualItem.image}
           alt={individualItem.title}
@@ -59,7 +59,7 @@ const ItemDetail = ({ items }: ItemProps) => {
           </p>
           <Button
             onClick={addToCartHandler}
-            className={`my-4 w-1/5 bg-black text-neutral-100 transition duration-500 ease-in-out hover:bg-neutral-800 ${
+            className={`my-4 w-1/5 bg-black text-neutral-100 transition duration-500 ease-in-out hover:bg-neutral-800 max-sm:w-full ${
               isItemAdded ? 'bg-green-500 text-white hover:bg-green-500' : ''
             }`}
           >
