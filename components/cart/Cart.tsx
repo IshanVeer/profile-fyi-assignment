@@ -31,7 +31,7 @@ const Cart = () => {
                 key={item.id}
                 className=' flex items-center justify-between border-b-2 px-4 py-8 max-sm:flex-col max-sm:items-end'
               >
-                <div className='flex items-center gap-12 max-sm:items-start max-sm:gap-4'>
+                <div className='flex items-center justify-between gap-12 max-sm:items-start max-sm:gap-4'>
                   <Image
                     src={item.image}
                     className='w-20'

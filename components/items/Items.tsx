@@ -42,7 +42,7 @@ const Items = ({ item }: ItemProps) => {
       <Button
         onClick={addToCartHandler}
         className={`my-4 w-full bg-black text-neutral-100 hover:bg-neutral-800 transition duration-500 ease-in-out ${
-          isItemAdded ? 'bg-green-500 text-white' : ''
+          isItemAdded ? 'bg-green-500 hover:bg-green-500 text-white' : ''
         }`}
       >
         {isItemAdded ? 'Added To Cart' : 'Add To Cart'}

@@ -15,7 +15,7 @@ const Navbar = () => {
     return totalNumberOfItems + item.quantity;
   }, 0);
   return (
-    <nav className=' m-auto flex items-center justify-between px-8 py-4'>
+    <nav className=' m-auto flex items-center shadow-sm justify-between px-8 py-4'>
       <div className='flex items-center gap-3'>
         <MobileNav />
         <Link href='/'>
